@@ -22,22 +22,60 @@
         <!-- Slider main container -->
         <div class="swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1</div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                <div class="swiper-slide">Slide 4</div>
-                <div class="swiper-slide">Slide 5</div>
-                <div class="swiper-slide">Slide 6</div>
-                <div class="swiper-slide">Slide 7</div>
-                <div class="swiper-slide">Slide 8</div>
-                <div class="swiper-slide">Slide 9</div>
-                <div class="swiper-slide">Slide 10</div>
-                <div class="swiper-slide">Slide 11</div>
+                <div class="swiper-slide">
+                    <img class="swiper__item swiper__image" src="img/Lenovo.png" alt="Lenovo" width="108" height="32" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="swiper__item swiper__image" src="img/Samsung.png" alt="Samsung" width="116" height="38.52" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="swiper__item swiper__image" src="img/Apple.png" alt="Apple" width="44" height="44" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="swiper__item swiper__image" src="img/ViewSonic.png" alt="ViewSonic" width="128" height="21" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="swiper__item swiper__image" src="img/Bosch.png" alt="Bosch" width="128" height="28.6" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img class="swiper__item swiper__image" src="img/hp.png" alt="hp" width="52" height="52" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide swiper__tablet_hidden">
+                    <img class="swiper__item swiper__image" src="img/acer.png" alt="Lenovo" width="94" height="24" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide swiper__tablet_hidden">
+                    <img class="swiper__item swiper__image" src="img/SONY.png" alt="SONY" width="128" height="25.6" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide swiper__tablet_hidden swiper__desktop_hidden">
+                    <img class="swiper__item swiper__image" src="img/Lenovo.png" alt="Lenovo" width="108" height="32" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide swiper__tablet_hidden swiper__desktop_hidden">
+                    <img class="swiper__item swiper__image" src="img/Samsung.png" alt="Samsung" width="116" height="38.52" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
+                <div class="swiper-slide swiper__tablet_hidden swiper__desktop_hidden">
+                    <img class="swiper__item swiper__image" src="img/Apple.png" alt="Apple" width="44" height="44" draggable="false">
+                    <div class="swiper__item swiper__arrow"></div>
+                </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
 
-        <div class="test">test</div>
+        <div id="show" class="show">
+            <div class="show__wrapper">
+                <img id="show__image" src="img/expand.png" alt="Показать все" width="24" height="24" draggable="false">
+                <p id="show__text" class="show__text">Показать все</p>
+            </div>
+        </div>
     </section>
 
     <script>
@@ -65,6 +103,37 @@
         }
         swiperCard();
         window.addEventListener("resize", swiperCard);
+
+        var isVisible = false;
+
+        const showButton = document.getElementById('show');
+        const showText = document.getElementById("show__text");
+        const myImage = document.getElementById('show__image');
+        const elementsToToggleOnTablet = document.querySelectorAll('.swiper__tablet_hidden');
+        const elementsToToggleOnDesktop = document.querySelectorAll('.swiper__desktop_hidden');
+
+        showButton.addEventListener('click', function () {
+            const screenWidth = window.innerWidth;
+            let value;
+
+            if (screenWidth < 768) {
+                value = 'mobile';
+            } else if (screenWidth < 1120) {
+                isVisible = !isVisible;
+                elementsToToggleOnTablet.forEach(function (element) {
+                    element.style.display = isVisible ? 'flex' : 'none';
+                });
+                showText.textContent = isVisible ? 'Скрыть' : 'Показать все';
+                myImage.src = isVisible ? 'img/collapse.png' : 'img/expand.png';
+            } else {
+                isVisible = !isVisible;
+                elementsToToggleOnDesktop.forEach(function (element) {
+                    element.style.display = isVisible ? 'flex' : 'none';
+                });
+                showText.textContent = isVisible ? 'Скрыть' : 'Показать все';
+                myImage.src = isVisible ? 'img/collapse.png' : 'img/expand.png';
+            }
+        });
     </script>
 </body>
 </html>
