@@ -85,7 +85,7 @@
             if (window.innerWidth < 768) {
                 if (!init) {
                     init = true;
-                    const MySwiper = new Swiper('.swiper', {
+                    swiper = new Swiper('.swiper', {
                         direction: "horizontal",
                         slidesPerView: 1.3,
                         spaceBetween: 30,
@@ -97,7 +97,7 @@
                     });
                 }
             } else if (init) {
-                swiper.destroy();
+                swiper.disable();
                 init = false;
             }
         }
